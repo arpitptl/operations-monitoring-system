@@ -41,8 +41,8 @@ def update_form_record(table_name: str, record_id: int, update_data: DataEntryCr
 
 # Retrieve data from a dynamic table
 @router.get("/data/{table_name}")
-def get_all_data(form_name: str, db: Session = Depends(get_db)):
-    data = get_data_from_dynamic_table(form_name, db)
+def get_all_data(table_name: str, db: Session = Depends(get_db)):
+    data = get_data_from_dynamic_table(table_name, db)
     logger.info(f"DATA: {data}")
     return data
 
@@ -86,8 +86,8 @@ def approve_data(approval_payload: DataEntryApprove, table_name: str, record_id:
 
 
 @router.post("/data/{table_name}/{record_id}/delete")
-def delete_data(form_id: int, data_id:int, db: Session = Depends(get_db), current_user: User = Depends(get_current_active_admin)):
-    logger.info(f"DELETING DATA FROM FORM {form_id} | DATA ID: {data_id}")
+def delete_data(table_name: str, record_id:int, db: Session = Depends(get_db), current_user: User = Depends(get_current_active_admin)):
+    logger.info(f"DELETING DATA FROM FORM {table_name} | DATA ID: {record_id}")
 
     return {"message": "Data deleted successfully"}
 
