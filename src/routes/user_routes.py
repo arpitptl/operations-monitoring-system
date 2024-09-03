@@ -64,7 +64,7 @@ class RoleResponse(BaseModel):
 
 # CRUD operations for User
 @router.post("/users", response_model=UserResponse)
-def create_user(user_payload: UserCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_active_admin)):
+def create_user(user_payload: UserCreate, db: Session = Depends(get_db)):
     user = User(
         name=user_payload.name,
         email=user_payload.email,
