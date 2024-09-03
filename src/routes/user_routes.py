@@ -130,7 +130,7 @@ def delete_user(user_id: int, db: Session = Depends(get_db), current_user: User 
 
 # CRUD operations for Role
 @router.post("/roles", response_model=RoleResponse)
-def create_role(role: RoleCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_active_admin)):
+def create_role(role: RoleCreate, db: Session = Depends(get_db)):
     db_role = Role(**role.dict())
     db.add(db_role)
     db.commit()
